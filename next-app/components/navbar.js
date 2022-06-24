@@ -1,9 +1,9 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { SkynetClient } from "skynet-js";
+import { useStore } from "../store";
 import React, { useState } from "react";
-import Image from "next/image";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -11,13 +11,39 @@ function classNames(...classes) {
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "Form", href: "/form" },
-  //{ name: "Saved", href: "/saved" },
+  { name: "Upload", href: "/upload" },
 ];
 
 const Navbar = () => {
-  //const router = useRouter();
+  //const [user, setUser] = useState("a");
+  /*   const wallet = useStore((state) => state.wallet);
+  const contract = useStore((state) => state.contract);
+  const nearConfig = useStore((state) => state.nearConfig);
+  const currentUser = useStore((state) => state.currentUser);
+ */
 
+  const ConnectWallet = async () => {
+    const client = new SkynetClient("https://siasky.net");
+    const dataDomain = "localhost";
+
+    const mySky = await client.loadMySky(dataDomain);
+    await mySky.requestLoginAccess();
+
+    const a = await mySky.userID();
+    setUser(a);
+    console.log(a);
+  };
+  /*   const ConnectWallet = () => {
+    wallet.requestSignIn(
+      {
+        contractId: nearConfig.contractName,
+        methodNames: [contract.nft_mint.name],
+      }, //contract requesting access
+      "PinSave",
+      null,
+      null
+    );
+  }; */
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -66,6 +92,18 @@ const Navbar = () => {
                       {item.name}
                     </a>
                   ))}
+                </div>
+              </div>
+
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <button
+                    onClick={() => ConnectWallet()}
+                    type="button"
+                    className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                  >
+                    Connect
+                  </button>
                 </div>
               </div>
             </div>
