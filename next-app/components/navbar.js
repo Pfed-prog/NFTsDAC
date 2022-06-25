@@ -15,13 +15,6 @@ const navigation = [
 ];
 
 const Navbar = () => {
-  //const [user, setUser] = useState("a");
-  /*   const wallet = useStore((state) => state.wallet);
-  const contract = useStore((state) => state.contract);
-  const nearConfig = useStore((state) => state.nearConfig);
-  const currentUser = useStore((state) => state.currentUser);
- */
-
   const ConnectWallet = async () => {
     const client = new SkynetClient("https://siasky.net");
     const dataDomain = "localhost";
@@ -29,21 +22,10 @@ const Navbar = () => {
     const mySky = await client.loadMySky(dataDomain);
     await mySky.requestLoginAccess();
 
-    const a = await mySky.userID();
-    setUser(a);
-    console.log(a);
+    const id = await mySky.userID();
+    console.log(id);
   };
-  /*   const ConnectWallet = () => {
-    wallet.requestSignIn(
-      {
-        contractId: nearConfig.contractName,
-        methodNames: [contract.nft_mint.name],
-      }, //contract requesting access
-      "PinSave",
-      null,
-      null
-    );
-  }; */
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
