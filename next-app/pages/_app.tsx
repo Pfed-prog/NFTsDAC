@@ -1,8 +1,8 @@
 import type { AppProps } from "next/app";
-import App from "next/app";
+//import App from "next/app";
 import Layout from "../components/layout";
 import "../styles/globals.css";
-import initContract from "../components/helpers/initsapp";
+//import initContract from "../components/helpers/initsapp";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   /*   contract: any,

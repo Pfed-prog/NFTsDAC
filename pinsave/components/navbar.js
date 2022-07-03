@@ -1,7 +1,7 @@
-import { Disclosure } from "@headlessui/react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import { SkynetClient } from "skynet-js";
+import React, { useState, Fragment } from "react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -12,15 +12,18 @@ const navigation = [
   { name: "Upload", href: "/upload" },
 ];
 
-const Navbar = () => {
-  const ConnectWallet = async () => {
-    const client = new SkynetClient("https://siasky.net");
+const Navbar = ({ client }) => {
+  const [id, setId] = useState(undefined);
+
+  const ConnectWallet = async (client) => {
+    console.log("aaa");
     const dataDomain = "localhost";
 
     const mySky = await client.loadMySky(dataDomain);
     await mySky.requestLoginAccess();
 
     const id = await mySky.userID();
+    setId(id);
     console.log(id);
   };
 
@@ -77,13 +80,21 @@ const Navbar = () => {
 
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <button
-                    onClick={() => ConnectWallet()}
-                    type="button"
-                    className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
-                  >
-                    Connect
-                  </button>
+                  {!id ? (
+                    <button
+                      onClick={() => ConnectWallet(client)}
+                      type="button"
+                      className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                    >
+                      Connect
+                    </button>
+                  ) : (
+                    <Menu>
+                      <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                        {id}
+                      </Menu.Button>
+                    </Menu>
+                  )}
                 </div>
               </div>
             </div>
