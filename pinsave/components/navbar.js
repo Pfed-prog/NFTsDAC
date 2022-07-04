@@ -1,7 +1,9 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
+
+import { useAppContext } from "../context/AppContext";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -13,18 +15,23 @@ const navigation = [
 ];
 
 const Navbar = ({ client }) => {
-  const [id, setId] = useState(undefined);
+  const { state, dispatch } = useAppContext();
+
+  const { id } = state;
 
   const ConnectWallet = async (client) => {
-    console.log("aaa");
+    //console.log(state);
     const dataDomain = "localhost";
 
     const mySky = await client.loadMySky(dataDomain);
     await mySky.requestLoginAccess();
 
-    const id = await mySky.userID();
-    setId(id);
-    console.log(id);
+    const _id = await mySky.userID();
+    //_id = _id.substring(0, 3);
+    console.log(_id);
+    dispatch({ type: "add_id", value: _id });
+
+    //console.log(state);
   };
 
   return (
@@ -80,7 +87,7 @@ const Navbar = ({ client }) => {
 
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  {!id ? (
+                  {!state.id ? (
                     <button
                       onClick={() => ConnectWallet(client)}
                       type="button"
