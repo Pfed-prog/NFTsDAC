@@ -7,8 +7,6 @@ export const AppReducer = (state, action) => {
       return action.value;
 
     case "add_id": {
-      console.log("wtf");
-      console.log(action.value);
       return {
         ...state,
         id: action.value,

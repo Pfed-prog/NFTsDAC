@@ -20,18 +20,14 @@ const Navbar = ({ client }) => {
   const { id } = state;
 
   const ConnectWallet = async (client) => {
-    //console.log(state);
     const dataDomain = "localhost";
 
     const mySky = await client.loadMySky(dataDomain);
     await mySky.requestLoginAccess();
 
     const _id = await mySky.userID();
-    //_id = _id.substring(0, 3);
-    console.log(_id);
-    dispatch({ type: "add_id", value: _id });
 
-    //console.log(state);
+    dispatch({ type: "add_id", value: _id });
   };
 
   return (
@@ -98,7 +94,7 @@ const Navbar = ({ client }) => {
                   ) : (
                     <Menu>
                       <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                        {id}
+                        {id.substring(0, 9)}
                       </Menu.Button>
                     </Menu>
                   )}

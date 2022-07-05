@@ -14,10 +14,6 @@ export function AppWrapper({ children }) {
     return { state, dispatch };
   }, [state, dispatch]);
 
-  //console.log(initialState.number);
-  //dispatch({ type: "add_number", value: 3 });
-  //console.log(state);
-
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("state1"))) {
       //checking if there already is a state in localstorage
@@ -29,6 +25,7 @@ export function AppWrapper({ children }) {
       console.log(JSON.parse(localStorage.getItem("state1")));
     }
   }, []);
+
   useEffect(() => {
     if (state !== initialState) {
       localStorage.setItem("state1", JSON.stringify(state));
