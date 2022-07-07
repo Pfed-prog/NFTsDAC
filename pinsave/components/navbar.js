@@ -1,8 +1,6 @@
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Disclosure, Menu } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import React, { useState, Fragment, useEffect } from "react";
-
 import { useAppContext } from "../context/AppContext";
 
 function classNames(...classes) {
