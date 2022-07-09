@@ -51,7 +51,7 @@ const Navbar = ({ client }) => {
                   <Link href="/">
                     <img
                       className="hidden lg:block h-8 w-auto"
-                      src="/assets/images/PinSave.png"
+                      src="/assets/images/PinSaveL.png"
                       alt="Pin Save"
                     />
                   </Link>
