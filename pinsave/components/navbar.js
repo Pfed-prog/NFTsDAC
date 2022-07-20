@@ -3,10 +3,6 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useAppContext } from "../context/AppContext";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Upload", href: "/upload" },
@@ -29,13 +25,16 @@ const Navbar = ({ client }) => {
   };
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-emerald-600">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16">
-              <div className="flex">
-                <div className="-ml-2 mr-2 flex items-center md:hidden">
+          <div
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+            aria-label="Top"
+          >
+            <div className="flex w-full items-center justify-between border-b border-indigo-500 py-4">
+              <div className="flex items-center">
+                <div className="-ml-2 mr-2 space-x-8 flex items-center md:hidden">
                   {/* Mobile menu */}
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
@@ -67,10 +66,7 @@ const Navbar = ({ client }) => {
                     <a
                       key={item.name}
                       href={item.href}
-                      className={classNames(
-                        "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "px-3 py-2 rounded-md text-sm font-medium"
-                      )}
+                      className="text-base text-gray-300 hover:text-white  hover:text-indigo px-3 py-2 rounded-md text-sm font-medium"
                       aria-current={item.current ? "page" : undefined}
                     >
                       {item.name}
@@ -80,38 +76,38 @@ const Navbar = ({ client }) => {
               </div>
 
               <div className="flex items-center">
-                <div className="flex-shrink-0">
+                <div className="ml-10 space-x-4">
                   {!state.id ? (
                     <button
                       onClick={() => ConnectWallet(client)}
                       type="button"
-                      className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                      className="text-base relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-550"
                     >
                       Connect
                     </button>
                   ) : (
                     <Menu>
-                      <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                      <Menu.Button className="text-base inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                         {id.substring(0, 9)}
                       </Menu.Button>
                     </Menu>
                   )}
+                  <a className="text-base relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-550">
+                    Wallet
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
           <Disclosure.Panel className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <div className="text-base px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as="a"
                   href={item.href}
-                  className={classNames(
-                    "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block px-3 py-2 rounded-md text-base font-medium"
-                  )}
+                  className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   {item.name}
                 </Disclosure.Button>

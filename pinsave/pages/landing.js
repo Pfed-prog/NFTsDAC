@@ -19,10 +19,12 @@ export default function Landing() {
             <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
               <div className="pr-12">
                 <h1 className="text-white font-semibold text-5xl">
-                  Pin Save - Decentralized Pinterest
+                  Your story starts with us.
                 </h1>
                 <p className="mt-4 text-lg text-blueGray-200">
-                  Take control of your data.
+                  This is a simple example of a Landing Page you can build using
+                  Notus NextJS. It features multiple CSS components based on the
+                  Tailwind CSS design system.
                 </p>
               </div>
             </div>
@@ -39,11 +41,10 @@ export default function Landing() {
                   <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
                     <FontAwesomeIcon icon={faRetweet} />
                   </div>
-                  <h6 className="text-xl font-semibold">
-                    Skynet Decentralized Storage
-                  </h6>
+                  <h6 className="text-xl font-semibold">Awarded Agency</h6>
                   <p className="mt-2 mb-4 text-blueGray-500">
-                    Upgradeable, resilient, and more open web
+                    Divide details about your product or agency work into parts.
+                    A paragraph describing a feature will be enough.
                   </p>
                 </div>
               </div>
@@ -55,9 +56,10 @@ export default function Landing() {
                   <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
                     <i className="fas fa-retweet"></i>
                   </div>
-                  <h6 className="text-xl font-semibold">Smart Contracts</h6>
+                  <h6 className="text-xl font-semibold">Free Revisions</h6>
                   <p className="mt-2 mb-4 text-blueGray-500">
-                    Securely serve web experiences directly to users
+                    Keep you user engaged by providing meaningful information.
+                    Remember that by this time, the user is curious.
                   </p>
                 </div>
               </div>
@@ -69,11 +71,10 @@ export default function Landing() {
                   <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400">
                     <i className="fas fa-fingerprint"></i>
                   </div>
-                  <h6 className="text-xl font-semibold">
-                    Decentralised Identity
-                  </h6>
+                  <h6 className="text-xl font-semibold">Verified Company</h6>
                   <p className="mt-2 mb-4 text-blueGray-500">
-                    Anonymity and data protection
+                    Write a few lines about each one. A paragraph describing a
+                    feature will be enough. Keep you user engaged!
                   </p>
                 </div>
               </div>
@@ -86,7 +87,7 @@ export default function Landing() {
                 <FontAwesomeIcon icon={faRetweet} />
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal">
-                Team
+                Working with us is a pleasure
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
                 Don't let your uses guess by attaching tooltips and popoves to
