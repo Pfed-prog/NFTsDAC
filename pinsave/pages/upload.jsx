@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { SpinnerGap } from "phosphor-react";
 import { ContentRecordDAC } from "@skynetlabs/content-record-library";
 import { SkynetClient } from "skynet-js";
+
 const portal = "https://siasky.net";
 const client = new SkynetClient(portal);
 
@@ -24,6 +25,7 @@ function Upload() {
   function filledFields() {
     return postId !== "" && postDesc !== "" && postTitle !== "";
   }
+
   useEffect(() => {
     // define async setup function
     async function initMySky() {

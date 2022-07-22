@@ -13,7 +13,7 @@ export default function Landing() {
             backgroundImage:
               "url('https://images.unsplash.com/photo-1656512547813-92d70486a837?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2984&q=3800')",
           }}
-        ></div>
+        />
         <div className="container relative mx-auto">
           <div className="items-center flex flex-wrap">
             <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
@@ -21,7 +21,7 @@ export default function Landing() {
                 <h1 className="text-white font-semibold text-5xl">
                   Pin Save - Decentralized Pinterest
                 </h1>
-                <p className="mt-4 text-lg text-blueGray-200">
+                <p className="mt-4 text-lg text-blue-200">
                   Take control of your data.
                 </p>
               </div>
@@ -30,7 +30,7 @@ export default function Landing() {
         </div>
       </div>
 
-      <section className="pb-20 bg-sky-500 -mt-24">
+      <section className="pb-20 bg-gray-400 -mt-24">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap">
             <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">

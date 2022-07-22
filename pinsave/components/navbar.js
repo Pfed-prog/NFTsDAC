@@ -36,7 +36,7 @@ const Navbar = () => {
             className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
             aria-label="Top"
           >
-            <div className="flex w-full items-center justify-between border-b border-indigo-500 py-4">
+            <div className="flex w-full items-center justify-between  py-4">
               <div className="flex items-center">
                 <div className="-ml-2 mr-2 space-x-8 flex items-center md:hidden">
                   {/* Mobile menu */}
