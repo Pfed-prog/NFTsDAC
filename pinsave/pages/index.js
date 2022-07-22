@@ -89,18 +89,14 @@ export default function Landing() {
                 Team
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                Don't let your uses guess by attaching tooltips and popoves to
-                any element. Just make sure you enable them first via
-                JavaScript.
+                Text
               </p>
               <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-600">
-                The kit comes with three pre-built pages to help you get started
-                faster. You can change the text and images and you're good to
-                go. Just make sure you enable them first via JavaScript.
+                Text
               </p>
               <Link href="/">
                 <a href="#pablo" className="font-bold text-blueGray-700 mt-8">
-                  Check Notus NextJS!
+                  Link
                 </a>
               </Link>
             </div>
@@ -177,8 +173,7 @@ export default function Landing() {
                 <h3 className="text-3xl font-semibold">A growing company</h3>
                 <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
                   The extension comes with three pre-built pages to help you get
-                  started faster. You can change the text and images and you're
-                  good to go.
+                  started faster.
                 </p>
                 <ul className="list-none mt-6">
                   <li className="py-2">

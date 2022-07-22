@@ -22,7 +22,7 @@ export function AppWrapper({ children }) {
         type: "init_stored",
         value: JSON.parse(localStorage.getItem("state1")),
       });
-      console.log(JSON.parse(localStorage.getItem("state1")));
+      //console.log(JSON.parse(localStorage.getItem("state1")));
     }
   }, []);
 

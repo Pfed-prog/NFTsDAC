@@ -2,13 +2,17 @@ import { Disclosure, Menu } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useAppContext } from "../context/AppContext";
+import { SkynetClient } from "skynet-js";
+
+const portal = "https://siasky.net";
+const client = new SkynetClient(portal);
 
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Upload", href: "/upload" },
 ];
 
-const Navbar = ({ client }) => {
+const Navbar = () => {
   const { state, dispatch } = useAppContext();
 
   const { id } = state;

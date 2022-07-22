@@ -1,29 +1,95 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
 import { SpinnerGap } from "phosphor-react";
-
+import { ContentRecordDAC } from "@skynetlabs/content-record-library";
 import { SkynetClient } from "skynet-js";
+const portal = "https://siasky.net";
+const client = new SkynetClient(portal);
 
-const client = new SkynetClient("https://siasky.net");
-
-function upload() {
+function Upload() {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [state, setState] = useState(false);
+  const [uploadState, setUploadState] = useState(false);
   const [postId, setPostId] = useState("");
   const [postDesc, setPostDesc] = useState("");
   const [postTitle, setPostTitle] = useState("");
   const [uploading, setUploading] = useState();
+
+  const [mySky, setMySky] = useState();
+  const [loggedIn, setLoggedIn] = useState(null);
+
   const hiddenFileInput = useRef();
+
+  const dataDomain = "localhost";
 
   function filledFields() {
     return postId !== "" && postDesc !== "" && postTitle !== "";
   }
+  useEffect(() => {
+    // define async setup function
+    async function initMySky() {
+      try {
+        const contentRecord = new ContentRecordDAC();
+        console.log(contentRecord);
+        // load invisible iframe and define app's data domain
+        // needed for permissions write
+
+        console.log(1);
+
+        const mySky = await client.loadMySky(dataDomain);
+        //await mySky.requestLoginAccess();
+        console.log(12);
+        // check if user is already logged in with permissions
+        const loggedIn = await mySky.checkLogin();
+        console.log(loggedIn);
+        // set react state for login status and
+        // to access mySky in rest of app
+        //setMySky(mySky);
+        setLoggedIn(loggedIn);
+        const jsonData = {
+          dataDomain,
+        };
+
+        if (loggedIn) {
+          console.log(2);
+          //bugs
+          await mySky.loadDacs(contentRecord);
+          //await mySky.setJSON(dataDomain + "/", jsonData);
+
+          /* await contentRecord.recordNewContent({
+            skylink: jsonData.dataDomain,
+          }); */
+          // no such state
+          //setUserID(await mySky.userID());
+          console.log(3);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    // call async setup function
+    initMySky();
+  }, []);
 
   async function str() {
     const filled = filledFields();
 
     if (!uploading && filled) {
       setUploading(true);
+      const dataDomain = "localhost/";
+
+      const mySky = await client.loadMySky(dataDomain);
+      const loggedIn = await mySky.checkLogin();
+      console.log(loggedIn);
+
+      if (loggedIn) {
+        await mySky.setJSON(dataDomain, jsonData);
+        await mySky.loadDacs(contentRecord);
+        console.log(2);
+        const { data } = await mySky.getJSON(dataDomain);
+        console.log(data);
+        //setUserID(await mySky.userID());
+      }
 
       const { skylink } = await client.uploadFile(selectedImage);
       const skylinkUrl = await client.getSkylinkUrl(skylink);
@@ -91,7 +157,7 @@ function upload() {
             onChange={(event) => {
               if (event.target.files[0].type.includes("image")) {
                 setSelectedImage(event.target.files[0]);
-                setState(true);
+                setUploadState(true);
               }
             }}
           />
@@ -113,7 +179,7 @@ function upload() {
           </button>
         </div>
       </div>
-      {state && (
+      {uploadState && (
         <div className="text-center">
           <br />
           <button
@@ -133,4 +199,4 @@ function upload() {
   );
 }
 
-export default upload;
+export default Upload;
