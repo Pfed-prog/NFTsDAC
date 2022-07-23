@@ -40,7 +40,7 @@ export default function Landing() {
                     <FontAwesomeIcon icon={faRetweet} />
                   </div>
                   <h6 className="text-xl font-semibold">
-                    Skynet Decentralized Storage
+                    Decentralized Storage
                   </h6>
                   <p className="mt-2 mb-4 text-blueGray-500">
                     Upgradeable, resilient, and more open web

@@ -1,22 +1,27 @@
 import { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
 import { SpinnerGap } from "phosphor-react";
-import { ContentRecordDAC } from "@skynetlabs/content-record-library";
+//import { ContentRecordDAC } from "@skynetlabs/content-record-library";
 import { SkynetClient } from "skynet-js";
 
 const portal = "https://siasky.net";
 const client = new SkynetClient(portal);
 
 function Upload() {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [uploadState, setUploadState] = useState(false);
+  //form
   const [postId, setPostId] = useState("");
-  const [postDesc, setPostDesc] = useState("");
   const [postTitle, setPostTitle] = useState("");
+  const [postDesc, setPostDesc] = useState("");
+
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const [completedForm, setCompletedForm] = useState(false);
   const [uploading, setUploading] = useState();
+  const [uploadResponse, setUploadResponse] = useState();
 
   const [mySky, setMySky] = useState();
   const [loggedIn, setLoggedIn] = useState(null);
+  const [userID, setUserID] = useState();
 
   const hiddenFileInput = useRef();
 
@@ -30,39 +35,19 @@ function Upload() {
     // define async setup function
     async function initMySky() {
       try {
-        const contentRecord = new ContentRecordDAC();
-        console.log(contentRecord);
-        // load invisible iframe and define app's data domain
-        // needed for permissions write
-
-        console.log(1);
+        //const contentRecord = new ContentRecordDAC();
+        //console.log(contentRecord);
 
         const mySky = await client.loadMySky(dataDomain);
+        setMySky(mySky);
         //await mySky.requestLoginAccess();
-        console.log(12);
-        // check if user is already logged in with permissions
         const loggedIn = await mySky.checkLogin();
         console.log(loggedIn);
-        // set react state for login status and
-        // to access mySky in rest of app
-        //setMySky(mySky);
+
         setLoggedIn(loggedIn);
-        const jsonData = {
-          dataDomain,
-        };
 
         if (loggedIn) {
-          console.log(2);
-          //bugs
-          await mySky.loadDacs(contentRecord);
-          //await mySky.setJSON(dataDomain + "/", jsonData);
-
-          /* await contentRecord.recordNewContent({
-            skylink: jsonData.dataDomain,
-          }); */
-          // no such state
-          //setUserID(await mySky.userID());
-          console.log(3);
+          setUserID(await mySky.userID());
         }
       } catch (e) {
         console.error(e);
@@ -78,24 +63,26 @@ function Upload() {
 
     if (!uploading && filled) {
       setUploading(true);
-      const dataDomain = "localhost/";
 
-      const mySky = await client.loadMySky(dataDomain);
-      const loggedIn = await mySky.checkLogin();
-      console.log(loggedIn);
+      //const mySky = await client.loadMySky(dataDomain);
+      //const loggedIn = await mySky.checkLogin();
+      //console.log(loggedIn);
 
-      if (loggedIn) {
-        await mySky.setJSON(dataDomain, jsonData);
-        await mySky.loadDacs(contentRecord);
-        console.log(2);
-        const { data } = await mySky.getJSON(dataDomain);
-        console.log(data);
-        //setUserID(await mySky.userID());
-      }
+      //if (loggedIn) {
+      //await mySky.setJSON(dataDomain, jsonData);
+      //await mySky.loadDacs(contentRecord);
+      //const { data } = await mySky.getJSON(dataDomain);
+      //console.log(data);
+      //setUserID(await mySky.userID());
+      //}
 
-      const { skylink } = await client.uploadFile(selectedImage);
-      const skylinkUrl = await client.getSkylinkUrl(skylink);
-      console.log("File Uploaded:", skylinkUrl);
+      const jsonData = {
+        bla: postId,
+      };
+      //const { skylink } = await client.uploadFile(selectedImage);
+      await client.db.setJSON("", "", jsonData);
+      //const skylinkUrl = await client.getSkylinkUrl(skylink);
+      //console.log("File Uploaded:", skylinkUrl);
 
       toast.success("Image Uploaded Successfully", {
         style: {
@@ -105,11 +92,12 @@ function Upload() {
         },
       });
       setUploading(false);
+      setUploadResponse(skylinkUrl);
     }
   }
 
   return (
-    <div className="mx-3">
+    <div className="container mx-auto">
       <div className="mt-6 max-w-screen-md mx-auto">
         <div className="items-center -mx-2 md:flex">
           <div className="w-full mx-2">
@@ -159,11 +147,10 @@ function Upload() {
             onChange={(event) => {
               if (event.target.files[0].type.includes("image")) {
                 setSelectedImage(event.target.files[0]);
-                setUploadState(true);
+                setCompletedForm(true);
               }
             }}
           />
-
           {selectedImage && (
             <img
               src={URL.createObjectURL(selectedImage)}
@@ -181,7 +168,7 @@ function Upload() {
           </button>
         </div>
       </div>
-      {uploadState && (
+      {completedForm && (
         <div className="text-center">
           <br />
           <button
@@ -195,6 +182,7 @@ function Upload() {
               "Submit"
             )}
           </button>
+          <div> {uploadResponse} </div>
         </div>
       )}
     </div>
